@@ -8,3 +8,29 @@
 
 3. Correr la aplicación: <br>
   ./gradlew bootRun
+
+
+Crear Dockerfile:
+
+# 1. Usar una imagen base oficial de Java 11 (o la versión de Java que estés usando)
+FROM openjdk:11-jre-slim
+
+# 2. Establecer el directorio de trabajo en el contenedor
+WORKDIR /app
+
+# 3. Copiar el archivo JAR generado al contenedor
+COPY target/mi-aplicacion.jar /app/mi-aplicacion.jar
+
+# 4. Exponer el puerto que utiliza la aplicación (8080 en este caso)
+EXPOSE 8080
+
+# 5. Comando para ejecutar el archivo JAR
+ENTRYPOINT ["java", "-jar", "/app/mi-aplicacion.jar"]
+
+Crear imagen de docker:
+
+docker build -t parcial2 .
+
+docker run -p 8080:8080 parcial2
+
+
