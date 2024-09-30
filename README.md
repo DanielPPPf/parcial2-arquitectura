@@ -1,22 +1,10 @@
-Esto levantará un contenedor de MySQL con las siguientes credenciales:
+1. Clonar Repositorio:
 
-- **Usuario:** root
-- **Contraseña:** rootpassword
-- **Base de datos:** app_db
+   En una terminal de git bash:<br>
+    git clone https://github.com/DanielPPPf/parcial2-arquitectura
+   
+2. Crear un contenedor mysql con las propiedades de la aplicación: <br>
+  docker run --name mysql-yms -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=yms -e MYSQL_USER=yms_user -e MYSQL_PASSWORD=yms_clave -p 3306:3306 -d mysql:5.7
 
-## Paso 2: Configurar el archivo `application.yml`
-
-Asegúrate de que el archivo `src/main/resources/application.yml` tenga la siguiente configuración:
-
-```yaml
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/app_db
-    username: root
-    password: rootpassword
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+3. Correr la aplicación: <br>
+  ./gradlew bootRun
