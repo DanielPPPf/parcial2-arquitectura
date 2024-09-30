@@ -1,16 +1,22 @@
-# Parcial 2 - Arquitectura
+Esto levantará un contenedor de MySQL con las siguientes credenciales:
 
-Este proyecto está diseñado para correr con una base de datos MySQL utilizando Docker. A continuación se explican los pasos para ejecutar la aplicación localmente.
+- **Usuario:** root
+- **Contraseña:** rootpassword
+- **Base de datos:** app_db
 
-## Requisitos
+## Paso 2: Configurar el archivo `application.yml`
 
-- Docker
-- Java 17+
-- Gradle
+Asegúrate de que el archivo `src/main/resources/application.yml` tenga la siguiente configuración:
 
-## Paso 1: Crear y correr el contenedor de MySQL
-
-Primero, debemos levantar un contenedor de MySQL. Ejecuta el siguiente comando:
-
-```bash
-docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=rootpassword -e MYSQL_DATABASE=app_db -p 3306:3306 -d mysql:latest
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/app_db
+    username: root
+    password: rootpassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
